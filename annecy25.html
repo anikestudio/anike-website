@@ -37,7 +37,7 @@
 				bottom: 0;
 				width: 100%;
 				height: 0;
-				mix-blend-mode: color-dodge;
+				mix-blend-mode: multiply;
 				transition:
 				height 100ms ease-in-out;
 			}
@@ -54,13 +54,14 @@
 			}
 
 			.content {
-				padding: var(--anike-main-padding);
+				padding: 2rem;
 				max-width: 45rem;
 				align-self: center;
 				flex-grow: 1;
 				display: flex;
 				flex-direction: column;
 				gap: 4rem;
+				text-align: center;
 			}
 
 			.header {
@@ -68,10 +69,15 @@
 				justify-content: space-between;
 				align-items: center;
 				padding-bottom: 2rem;
+				gap: 1rem;
 			}
 
 			.logo {
 				height: 4rem;
+			}
+
+			.logo.annecy {
+				height: 3.5rem;
 			}
 
 			.title {
@@ -79,24 +85,45 @@
 				justify-content: center;
 			}
 
-			.donate {
-				display: flex;
-				gap: var(--anike-main-padding);
+			.teaser {
+				width: 40rem;
+				height: calc(40rem*0.5625);
 			}
 
-			.donate > a {
-				flex-grow: 1;
-				border: .3rem solid var(--anike-color);
+			.donate {
+				background-color: var(--anike-color);
+				color: white;
+				text-align: center;
+				padding: 2rem;
+			}
+
+			.donate > h1 {
+				margin: 0rem;
+				margin-bottom: 1.5rem;
+				font-size: x-large;
+			}
+
+			.donation-buttons {
+				display: flex;
+				gap: 2rem;
+				justify-content: space-evenly;
+			}
+
+			.donation-buttons > a {
+				width: 20%;
+				border: .3rem solid white;
+				background-color: white;
+				color: var(--anike-color-text);
 				text-decoration: none;
-				height: var(--anike-main-padding);
+				height: 2rem;
 
 				display: flex;
 				align-items: center;
 				justify-content: center;
 			}
 
-			.donate > a:hover::before {
-				/* height: 0%; */
+			.donation-buttons > a::before {
+				mix-blend-mode: multiply;
 			}
 
 			.links {
@@ -110,32 +137,94 @@
 				content: "/";
 			}
 
+			@media (max-width: 40em) {
+
+				.links {
+					flex-direction: column;
+				}
+				.links div:not(:last-child)::after {
+					padding-left: unset;
+					content: unset;
+				}
+
+				.content {
+					gap: 2rem;
+					padding: 0rem;
+				}
+
+				.content > div {
+					padding: 1rem;
+				}
+
+				.logo {
+					height: 3.5rem;
+				}
+				.logo.annecy {
+					height: 3.0rem;
+				}
+
+				.content > .header {
+					padding-bottom: 2rem;
+				}
+
+				.teaser {
+					width: 100vw;
+					height: calc(100vw*0.5625);
+					padding: 0rem;
+				}
+
+				.content > .info {
+					padding: 0rem;
+				}
+
+				.content > .donate {
+					padding: 2rem;
+				}
+
+				.donation-buttons {
+					gap: 1rem;
+				}
+
+				.content > .links {
+					padding-bottom: 4rem;
+				}
+			}
+
 		</style>
 	</head>
 	<body>
 		<div class="content">
 			<div class="header">
 				<div><img class="logo" src="./resources/logo.svg" /></div>
-				<div><img class="logo" src="./resources/annecy25.svg" /></div>
+				<div><img class="annecy logo" src="./resources/annecy25.svg" /></div>
 			</div>
 			<div class="title">
 				<img class="logo" src="https://grattachecca.net/media/logo.svg" />
 			</div>
-			<div class="teaser">
-				<iframe
-					width="560"
-					height="315"
-					src="https://www.youtube.com/embed/Ck7IBp8M8u0?si=fOyKbg4ssjEiEjss"
-					frameborder="0"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-					referrerpolicy="strict-origin-when-cross-origin"
-					allowfullscreen>
-				</iframe>
+			<div class="info">
+				<div class="teaser">
+					<iframe
+						width="100%"
+						height="100%"
+						src="https://www.youtube.com/embed/Ck7IBp8M8u0?si=fOyKbg4ssjEiEjss"
+						frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						referrerpolicy="strict-origin-when-cross-origin"
+						allowfullscreen>
+					</iframe>
+				</div>
+				<div>
+					<p>Open to co-production opportunities!</p>
+					<p>info@anike.studio</p>
+				</div>
 			</div>
 			<div class="donate">
-				<a href="NO.html"><div>Donate £5</div></a>
-				<a href="NO.html"><div>Donate £20</div></a>
-				<a href="https://pay.tide.co/products/grattachecc-RAYPx1ki"><div>Donate £50</div></a>
+				<h1>Donate</h1>
+				<div class="donation-buttons">
+					<a target="_blank" href="NO.html"><div>£5</div></a>
+					<a target="_blank" href="NO.html"><div>£20</div></a>
+					<a target="_blank" href="https://pay.tide.co/products/grattachecc-RAYPx1ki"><div>£50</div></a>
+				</div>
 			</div>
 			<div class="links">
 				<div><a href="https://anike.studio/">Website</a></div>
