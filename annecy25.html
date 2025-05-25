@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ANIKE @ Annecy 2025</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- <script
+			src="https://tinylytics.app/embed/Lx8NdyyB7y-sag1EPcYh.js"
+			defer>
+		</script> -->
+		<link rel="icon" href="favicon.ico" />
+		<style>
+			:root {
+				--anike-color: #69bfb5;
+				--anike-color-text: #448079;
+				--anike-main-padding: 2rem;
+			}
+
+			html, body {
+				padding: 0px;
+				margin: 0px;
+				border: none;
+				height: 100%;
+				width: 100%;
+			}
+
+			a {
+				color: unset;
+				position: relative;
+			}
+
+			a::before {
+				content: '';
+				background-color: var(--anike-color);
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				height: 0;
+				mix-blend-mode: color-dodge;
+				transition:
+				height 100ms ease-in-out;
+			}
+
+			a:hover::before {
+				height: 100%;
+			}
+
+			body {
+				font-family: Helvetica, sans-serif;
+				color: var(--anike-color-text);
+				display: flex;
+				flex-direction: column;
+			}
+
+			.content {
+				padding: var(--anike-main-padding);
+				max-width: 45rem;
+				align-self: center;
+				flex-grow: 1;
+				display: flex;
+				flex-direction: column;
+				gap: 4rem;
+			}
+
+			.header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding-bottom: 2rem;
+			}
+
+			.logo {
+				height: 4rem;
+			}
+
+			.title {
+				display: flex;
+				justify-content: center;
+			}
+
+			.donate {
+				display: flex;
+				gap: var(--anike-main-padding);
+			}
+
+			.donate > a {
+				flex-grow: 1;
+				border: .3rem solid var(--anike-color);
+				text-decoration: none;
+				height: var(--anike-main-padding);
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.donate > a:hover::before {
+				/* height: 0%; */
+			}
+
+			.links {
+				display: flex;
+				justify-content: center;
+				gap: .5rem;
+			}
+
+			.links div:not(:last-child)::after {
+				padding-left: .5rem;
+				content: "/";
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="content">
+			<div class="header">
+				<div><img class="logo" src="./resources/logo.svg" /></div>
+				<div><img class="logo" src="./resources/annecy25.svg" /></div>
+			</div>
+			<div class="title">
+				<img class="logo" src="https://grattachecca.net/media/logo.svg" />
+			</div>
+			<div class="teaser">
+				<iframe
+					width="560"
+					height="315"
+					src="https://www.youtube.com/embed/Ck7IBp8M8u0?si=fOyKbg4ssjEiEjss"
+					frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					referrerpolicy="strict-origin-when-cross-origin"
+					allowfullscreen>
+				</iframe>
+			</div>
+			<div class="donate">
+				<a href="NO.html"><div>Donate £5</div></a>
+				<a href="NO.html"><div>Donate £20</div></a>
+				<a href="https://pay.tide.co/products/grattachecc-RAYPx1ki"><div>Donate £50</div></a>
+			</div>
+			<div class="links">
+				<div><a href="https://anike.studio/">Website</a></div>
+				<div><a href="https://www.instagram.com/anikestudio/">Instagram</a></div>
+				<div><a href="https://bsky.app/profile/anike.studio">Bluesky</a></div>
+				<div><a href="https://www.tiktok.com/@anike.studio">TikTok</a></div>
+				<div><a href="https://www.tumblr.com/anikestudio">Tumblr</a></div>
+				<div><a href="https://www.youtube.com/@anike.studio">Youtube</a></div>
+				<div><a href="https://x.com/anikestudio">X</a></div>
+			</div>
+		</div>
+	</body>
+</html>
