@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Annecy 2025 calendar - ANIKE studio</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script
+			src="https://tinylytics.app/embed/Lx8NdyyB7y-sag1EPcYh/min.js"
+			defer>
+		</script>
+        <link rel="icon" href="favicon.ico" />
+        <style>
+            @font-face {
+				font-family: "Figtree";
+				src:
+					local("Figtree"),
+					url("./resources/Figtree-Regular.ttf")
+			}
+
+            html, body {
+                padding: 0rem;
+                margin: 0rem;
+                border: 0rem;
+            }
+
+            body {
+                font-family: "Figtree", Helvetica, sans-serif;
+                width: fit-content;
+            }
+
+            #calendar {
+                display: flex;
+            }
+
+            #footer {
+                background-color: white;
+                position: fixed;
+                width: 100%;
+                bottom: 0rem;
+                display: flex;
+                align-items: center;
+                padding: 1rem;
+                border-top: .1rem solid rgba(128, 128, 128, 0.5);
+                gap: .4rem;
+                z-index: 2;
+            }
+
+            #calendar>.col:first-child {
+                position: sticky;
+                left: 0px;
+                padding-right: 0rem;
+                padding-left: 0rem;
+                background-color: white;
+                z-index: 1;
+            }
+
+            #calendar>.col:first-child>.col-label {
+                visibility: hidden;
+            }
+
+            .col {
+                border-right: .1rem solid rgba(128, 128, 128, 0.5);
+                padding: .5rem;
+                padding-bottom: 5rem;
+            }
+
+            .col-label {
+                position: sticky;
+                text-align: center;
+                top: .5rem;
+                height: 3.5rem;
+                background-color: #69bfb5;
+                border-bottom: .2rem solid gray;
+                padding: .5rem;
+            }
+
+            .block {
+                width: 10rem;
+                padding: .4rem;
+                border-bottom: solid transparent .2rem;
+                display: flex;
+                flex-direction: column;
+                gap: .2rem;
+            }
+            
+            .event {
+                background-color: #69bfb587;
+                border-color: rgba(128, 128, 128, 0.5);
+                overflow: hidden;
+                cursor: pointer;
+            }
+
+            .event>.timespan {
+                font-size: smaller;
+            }
+
+            .time {
+                width: 2rem;
+                text-align: right;
+                border-top: .1rem solid rgba(128, 128, 128, 0.5);;
+                border-bottom: 0rem; 
+                margin-right: 0rem;
+                margin-bottom: .1rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="calendar"></div>
+        <div id="footer">
+            <div>
+                <button onclick="changeDay(-1)">&lt;</button>
+            </div>
+            <div id="displayed-day"></div>
+            <div>
+                <button onclick="changeDay(+1)">&gt;</button>
+            </div>
+        </div>
+        <script>
+            function newElem(type, parent, cls) {
+                const elem = document.createElement(type);
+                elem.className = cls;
+                parent.appendChild(elem);
+                return elem;
+            }
+
+            function newLabel(parent, cls, text) {
+                const elem = newElem('div', parent, cls);
+                elem.innerText = text;
+                return elem;
+            }
+
+            function newBlock(column, block) {
+                const blockE = newElem('div', column, 'block');
+                const height = (block.duration) * vMult - 1;
+                blockE.style.height = `${height}rem`;
+                blockE.classList.add(block.type);
+
+                if (block.type == 'event') {
+                    blockE.onclick = () => window.open(block.link, '_blank');
+                    newLabel(blockE, 'timespan', `${block.start} - ${block.end}`);
+                    newLabel(blockE, null, block.title);
+                } else if (block.type == 'time') {
+                    newLabel(blockE, null, `${block.hour}`);
+                }
+            }
+
+            function changeDay(delta) {
+                selectedDay += delta;
+                if (selectedDay < 0) selectedDay = 0;
+                if (selectedDay >= days.length) selectedDay = days.length - 1;
+                loadDay();
+            }
+
+            const calE = document.getElementById('calendar');
+            const dayE = document.getElementById('displayed-day');
+            // amount of rem per hour
+            const vZoom = 7.0;
+            const vMult = vZoom / 3600;
+
+            const days = [
+                '2025-06-08',
+                '2025-06-09',
+                '2025-06-10',
+                '2025-06-11',
+                '2025-06-12',
+                '2025-06-13',
+            ];
+
+            var selectedDay = 0;
+            var eventData = null;
+
+            function addTimeCol() {
+                const timeCol = newElem('div', calE, 'col');
+                newLabel(timeCol, 'col-label', 'time');
+                for(let h = 7; h <= 24; h++) {
+                    newBlock(timeCol, {
+                        type: 'time',
+                        duration: 3600,
+                        hour: h,
+                    })
+                }
+            }
+
+            function loadDay() {
+                calE.textContent = '';
+                addTimeCol();
+                const day = days[selectedDay]
+                dayE.innerText = day;
+                eventData[day].forEach(location => {
+                    const locColE = newElem('div', calE, 'col');
+                    newLabel(locColE, 'col-label', location.location);
+                    location.events.forEach(e => newBlock(locColE, e));
+                })
+            }
+
+            const jsonUrl = "./annecy2025_events.json"
+            fetch(jsonUrl).then(res => res.json()).then(data => {
+                    eventData = data;
+                    loadDay();
+            })
+        </script>
+    </body>
+</html>
