@@ -53,6 +53,11 @@
                 align-items: center;
             }
 
+            #footer #displayed-day {
+                width: 8rem;
+                text-align: center;
+            }
+
             #footer .logo-box {
                 font-size: smaller;
             }
@@ -162,6 +167,15 @@
                 '2025-06-13',
             ];
 
+            const dayLabels = [
+                'Sunday 8th',
+                'Monday 9th',
+                'Tuesday 10th',
+                'Wednesday 11th',
+                'Thursday 12th',
+                'Friday 13th',
+            ]
+
             var selectedDay = 0;
             var eventData = null;
 
@@ -215,9 +229,8 @@
             function loadDay() {
                 calE.textContent = '';
                 addTimeCol();
-                const day = days[selectedDay]
-                dayE.innerText = day;
-                eventData[day].forEach(location => {
+                dayE.innerText = dayLabels[selectedDay];
+                eventData[days[selectedDay]].forEach(location => {
                     const locColE = newElem('div', calE, 'col');
                     const colLabE = newLabel(locColE, 'col-label', '');
                     newLabel(colLabE, '', location.location);
