@@ -39,10 +39,26 @@
                 bottom: 0rem;
                 display: flex;
                 align-items: center;
+                justify-content: space-between;
                 padding: 1rem;
                 border-top: .1rem solid rgba(128, 128, 128, 0.5);
-                gap: .4rem;
                 z-index: 2;
+                box-sizing: border-box;
+                box-shadow: 0rem 0rem .3rem #69bfb5;
+            }
+
+            #footer>div {
+                display: flex;
+                gap: .4rem;
+                align-items: center;
+            }
+
+            #footer .logo-box {
+                font-size: smaller;
+            }
+
+            #footer .logo-box .logo {
+                height: 2rem;
             }
 
             #calendar>.col:first-child {
@@ -52,6 +68,7 @@
                 padding-left: 0rem;
                 background-color: white;
                 z-index: 1;
+                box-shadow: 0rem 0rem .3rem #69bfb5;
             }
 
             #calendar>.col:first-child>.col-label {
@@ -68,10 +85,13 @@
                 position: sticky;
                 text-align: center;
                 top: .5rem;
-                height: 3.5rem;
+                height: 3.6rem;
                 background-color: #69bfb5;
                 border-bottom: .2rem solid gray;
                 padding: .5rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
             .block {
@@ -107,15 +127,44 @@
     <body>
         <div id="calendar"></div>
         <div id="footer">
-            <div>
-                <button onclick="changeDay(-1)">&lt;</button>
+            <div class="day-selector">
+                <div>
+                    <button onclick="changeDay(-1)">&lt;</button>
+                </div>
+                <div id="displayed-day"></div>
+                <div>
+                    <button onclick="changeDay(+1)">&gt;</button>
+                </div>
             </div>
-            <div id="displayed-day"></div>
-            <div>
-                <button onclick="changeDay(+1)">&gt;</button>
+
+            <div class="logo-box">
+                <div>Made by</div>
+                <div>
+                    <a href="annecy25.html" target="_blank">
+                        <img class="logo" src="resources/logo.svg"/>
+                    </a>
+                </div>
             </div>
         </div>
         <script>
+            const calE = document.getElementById('calendar');
+            const dayE = document.getElementById('displayed-day');
+            // amount of rem per hour
+            const vZoom = 7.0;
+            const vMult = vZoom / 3600;
+
+            const days = [
+                '2025-06-08',
+                '2025-06-09',
+                '2025-06-10',
+                '2025-06-11',
+                '2025-06-12',
+                '2025-06-13',
+            ];
+
+            var selectedDay = 0;
+            var eventData = null;
+
             function newElem(type, parent, cls) {
                 const elem = document.createElement(type);
                 elem.className = cls;
@@ -151,27 +200,9 @@
                 loadDay();
             }
 
-            const calE = document.getElementById('calendar');
-            const dayE = document.getElementById('displayed-day');
-            // amount of rem per hour
-            const vZoom = 7.0;
-            const vMult = vZoom / 3600;
-
-            const days = [
-                '2025-06-08',
-                '2025-06-09',
-                '2025-06-10',
-                '2025-06-11',
-                '2025-06-12',
-                '2025-06-13',
-            ];
-
-            var selectedDay = 0;
-            var eventData = null;
-
             function addTimeCol() {
                 const timeCol = newElem('div', calE, 'col');
-                newLabel(timeCol, 'col-label', 'time');
+                newLabel(timeCol, 'col-label', '');
                 for(let h = 7; h <= 24; h++) {
                     newBlock(timeCol, {
                         type: 'time',
@@ -188,7 +219,8 @@
                 dayE.innerText = day;
                 eventData[day].forEach(location => {
                     const locColE = newElem('div', calE, 'col');
-                    newLabel(locColE, 'col-label', location.location);
+                    const colLabE = newLabel(locColE, 'col-label', '');
+                    newLabel(colLabE, '', location.location);
                     location.events.forEach(e => newBlock(locColE, e));
                 })
             }
