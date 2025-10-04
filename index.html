@@ -3,10 +3,10 @@
 	<head>
 		<title>ANIKE studio</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<script
+		<!-- <script
 			src="https://tinylytics.app/embed/Lx8NdyyB7y-sag1EPcYh/min.js"
 			defer>
-		</script>
+		</script> -->
 		<link rel="icon" href="favicon.ico" />
 		<style>
 			@font-face {
@@ -55,44 +55,38 @@
 			body {
 				font-family: "Figtree", Helvetica, sans-serif;
 				color: var(--anike-color-text);
-				display: flex;
-				flex-direction: column;
 			}
 
 			.content {
-				padding: var(--anike-main-padding);
-				max-width: 45rem;
-				align-self: center;
-				flex-grow: 1;
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-			}
-
-			.logo img {
+				background-color: #448079;
+				height: 100%;
 				width: 100%;
-			}
-
-			.info-block {
-				text-align: center;
-				padding-top: 4rem;
-				font-size: large;
-				display: flex;
-				flex-direction: column;
-				gap: 1rem;
 			}
 
 			.footer {
 				padding: var(--anike-main-padding);
 				display: flex;
-				justify-content: space-between;
-				gap: 1rem;
-				align-items: center;
-				flex-wrap: wrap;
+				gap: var(--anike-main-padding);
 			}
 
-			.footer>div {
-				flex-grow: 1;
+			.logo {
+				max-width: 30rem;
+			}
+			.logo img {
+				width: 100%;
+			}
+
+			.footer-text {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				gap: 1rem;
+				padding: 0.2rem;
+			}
+
+			.info-block {
+				font-size: large;
+				padding-bottom: 1rem;
 			}
 			
 			.socials {
@@ -106,26 +100,25 @@
 			}
 			
 			.company-info {
-				text-align: right;
 				font-size: small;
 				color: var(--anike-color);
 			}
 
-			@media (max-width: 40em) {
+			@media (max-width: 50em) {
 				:root {
 					--anike-main-padding: 1rem;
 				}
 
-				.content {
-					justify-content: unset;
+				.footer {
+					padding: 2rem;
+					gap: 2rem;
+					flex-direction: column;
+					text-align: center;
+					align-items: center;
 				}
 
-				.footer {
-					padding-top: 4rem;
-					gap: 5rem;
-					text-align: center;
-					justify-content: center;
-					flex-direction: column;
+				.footer-text {
+					gap: 2rem;
 				}
 
 				.socials {
@@ -145,34 +138,35 @@
 	</head>
 	<body>
 		<div class="content">
+			
+		</div>
+		<div class="footer">
 			<div class="logo">
 				<img
 					src="resources/logo.svg"
 					alt="Teal rectangular logo reading ANIKE"
 					role="img"/>
 			</div>
-			<div class="info-block">
-				<div><strong>Animation studio</strong></div>
+			<div class="footer-text">
 				<div>
-					Producing
-					<a href="https://grattachecca.net">Grattachecca</a>
+					<div class="info-block">
+						<div><strong>Animation studio</strong></div>
+						<div>&gt; info@anike.studio &lt;</div>
+					</div>
+					<div class="socials">
+						<div><a href="https://www.instagram.com/anikestudio/">Instagram</a></div>
+						<div><a href="https://bsky.app/profile/anike.studio">Bluesky</a></div>
+						<div><a href="https://www.tiktok.com/@anike.studio">TikTok</a></div>
+						<div><a href="https://www.tumblr.com/anikestudio">Tumblr</a></div>
+						<div><a href="https://www.youtube.com/@anike.studio">Youtube</a></div>
+						<div><a href="https://x.com/anikestudio">X</a></div>
+					</div>
 				</div>
-				<div>&gt; info@anike.studio &lt;</div>
-			</div>
-		</div>
-		<div class="footer">
-			<div class="socials">
-				<div><a href="https://www.instagram.com/anikestudio/">Instagram</a></div>
-				<div><a href="https://bsky.app/profile/anike.studio">Bluesky</a></div>
-				<div><a href="https://www.tiktok.com/@anike.studio">TikTok</a></div>
-				<div><a href="https://www.tumblr.com/anikestudio">Tumblr</a></div>
-				<div><a href="https://www.youtube.com/@anike.studio">Youtube</a></div>
-				<div><a href="https://x.com/anikestudio">X</a></div>
-			</div>
-			<div class="company-info">
-				<div>ANIKE is the trading name of Animazioni Meccaniche Ltd</div>
-				<div>Company registered in England and Wales (no. 16362560)</div>
-				<div>3rd Floor, 86-90 Paul Street, London, UK, EC2A 4NE</div>
+				<div class="company-info">
+					<div>ANIKE is the trading name of Animazioni Meccaniche Ltd</div>
+					<div>Company registered in England and Wales (no. 16362560)</div>
+					<div>3rd Floor, 86-90 Paul Street, London, UK, EC2A 4NE</div>
+				</div>
 			</div>
 		</div>
 	</body>
