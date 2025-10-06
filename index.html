@@ -47,6 +47,8 @@
 				border: none;
 				height: 100%;
 				width: 100%;
+
+				overflow-x: hidden;
 			}
 
 			a {
@@ -74,15 +76,17 @@
 				font-family: "Figtree", Helvetica, sans-serif;
 				color: var(--anike-color-text);
 				background-color: black;
+				background-image: linear-gradient(black 0% 50%, white 50% 100%);
+			}
+
+			.content {
 				background-image: url('./resources/still_arcade.png');
 				background-position: 50% 50%;
 				background-size: cover;
 				background-repeat: no-repeat;
-			}
-
-			.content {
+				
 				height: 100%;
-				width: 100%;
+				width: 100vw;
 
 				display: flex;
 				justify-content: center;
@@ -91,11 +95,18 @@
 					font-size: x-large;
 					color: white;
 					text-align: center;
-					padding-top: 10rem;
 
 					display: flex;
 					flex-direction: column;
 					gap: 6rem;
+
+					.top-filler {
+						flex-grow: 1;
+					}
+
+					.bottom-filler {
+						flex-grow: 2;
+					}
 
 					.grattachecca {
 						img {
@@ -143,13 +154,13 @@
 				display: flex;
 				gap: var(--anike-main-padding);
 				background-color: white;
-			}
 
-			.logo {
-				max-width: 30rem;
-			}
-			.logo img {
-				width: 100%;
+				.logo {
+					max-width: 30rem;
+					img {
+						width: 100%;
+					}
+				}
 			}
 
 			.footer-text {
@@ -186,14 +197,27 @@
 				}
 
 				.content {
+
 					.announcement {
+						gap: 2rem;
+
 						.kickstarter {
-							width: 100vw;
 							border-radius: unset;
+							box-sizing: border-box;
+							box-shadow: unset;
+
+							p {
+								margin: .8rem 0;
+							}
+
+							&:hover {
+								transform: unset;
+								box-shadow: unset;
+							}
 
 							img {
 								height: unset;
-								width: 80vw;
+								width: 84vw;
 							}
 						}
 					}
@@ -229,6 +253,7 @@
 	<body>
 		<div class="content">
 			<div class="announcement">
+				<div class="top-filler"></div>
 				<div class="grattachecca" >
 					<img
 						src="resources/grattachecca.svg"
@@ -251,6 +276,7 @@
 						</p>
 					</div>
 				</a>
+				<div class="bottom-filler"></div>
 			</div>
 		</div>
 		<div class="footer">
