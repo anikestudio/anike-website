@@ -55,18 +55,64 @@
 			body {
 				font-family: "Figtree", Helvetica, sans-serif;
 				color: var(--anike-color-text);
+				background-color: black;
+				background-image: url('./resources/still_arcade.png');
+				background-position: 50% 50%;
+				background-size: cover;
+				background-repeat: no-repeat;
 			}
 
 			.content {
-				background-color: #448079;
 				height: 100%;
 				width: 100%;
+
+				display: flex;
+				justify-content: center;
+
+				.announcement {
+					font-size: x-large;
+					color: white;
+					text-align: center;
+					padding-top: 10rem;
+
+					display: flex;
+					flex-direction: column;
+					gap: 6rem;
+
+					.grattachecca {
+						img {
+							height: 7rem;
+							max-width: 80vw;
+							filter: 
+								drop-shadow(0 0 1rem black)
+								drop-shadow(0 0 1rem rgba(0,0,0,.6));
+						}
+					}
+
+					a {
+						text-decoration: none;
+					}
+
+					a::before {
+						background-color: transparent;
+					}
+
+					.kickstarter {
+						padding: 1rem 5rem;
+						border-radius: 1rem;
+						background-color: #05ce78;
+						img {
+							height: 3rem;
+						}
+					}
+				}
 			}
 
 			.footer {
 				padding: var(--anike-main-padding);
 				display: flex;
 				gap: var(--anike-main-padding);
+				background-color: white;
 			}
 
 			.logo {
@@ -109,6 +155,20 @@
 					--anike-main-padding: 1rem;
 				}
 
+				.content {
+					.announcement {
+						.kickstarter {
+							width: 100vw;
+							border-radius: unset;
+
+							img {
+								height: unset;
+								width: 80vw;
+							}
+						}
+					}
+				}
+
 				.footer {
 					padding: 2rem;
 					gap: 2rem;
@@ -138,7 +198,22 @@
 	</head>
 	<body>
 		<div class="content">
-			
+			<div class="announcement">
+				<div class="grattachecca" >
+					<img src="resources/grattachecca.svg" />
+				</div>
+				<a 
+					href="https://www.kickstarter.com/projects/anikestudio/grattachecca?ref=5j2ycn" 
+					target="_blank"
+				>
+					<div class="kickstarter">
+						<p>Back it on</p>
+						<p>
+							<img src="resources/kickstarter-logo-white.png" />
+						</p>
+					</div>
+				</a>
+			</div>
 		</div>
 		<div class="footer">
 			<div class="logo">
