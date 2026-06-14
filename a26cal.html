@@ -1,0 +1,156 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Annecy 2025 calendar - ANIKE studio</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script
+			src="https://tinylytics.app/embed/Lx8NdyyB7y-sag1EPcYh/min.js"
+			defer>
+		</script>
+		<link rel="icon" href="favicon.ico" />
+		<style>
+			@font-face {
+				font-family: "Figtree";
+				src:
+					local("Figtree"),
+					url("./resources/Figtree-Regular.ttf")
+			}
+
+			body, html {
+				padding: 0px;
+				margin:  0px;
+				font-family: "Figtree", sans-serif;
+				font-size: 12pt;
+
+				font-weight: lighter;
+			}
+			.item {
+				min-width: 13rem;
+				box-sizing: border-box;
+
+				div {
+					padding: 0.5rem;
+				}
+			}
+			#header {
+				position: sticky;
+				top: 0rem;
+				display: flex;
+				z-index: 1;
+
+				.item {
+					background-color: lightgray;
+					border-left: 1px solid black;
+					border-bottom: 1px solid black;
+					padding: 0.5rem;
+				}
+			}
+
+			#events {
+				position: relative;
+				top: 0rem;
+				background-image:
+					linear-gradient(to right, lightgray 1px, transparent 1px),
+					linear-gradient(to bottom, lightgray 1px, transparent 1px);
+			}
+			.event {
+				position: absolute;
+				background-color: bisque;
+				width: 13rem;
+				border-left: 1px solid white;
+				border-bottom: 1px solid white;
+				text-decoration: none;
+				color: black;
+			}
+
+			#datetime {
+				position: fixed;
+				top: 6rem;
+				left: 0.5rem;
+				color: gray;
+				background-color: white;
+				padding: .2rem;
+			}
+
+			.chonky {
+				font-weight: bolder;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="header"></div>
+		<div id="events"></div>
+		<div id="datetime">Friday, 20:00</div>
+		<script>
+			const scale = 0.004;
+			const modulo = 13;
+			const url = "a26cal_data.json";
+			fetch(url)
+			.then(res => res.json())
+			.then(data => {
+				const header = document.getElementById("header");
+				const events = document.getElementById("events");
+				var latestEnd = 0;
+				Object.keys(data).sort().forEach((location, idx) => {
+					const headerElem = document.createElement("div");
+					headerElem.innerHTML = location.replaceAll("/", "</br>");
+					headerElem.className = "item";
+					header.appendChild(headerElem);
+
+					data[location].forEach(event => {
+						const eventElem = document.createElement("a");
+						eventElem.classList.add("item");
+						eventElem.classList.add("event");
+						eventElem.style.left = `${modulo*idx}rem`;
+						const top = event.rel_start * scale;
+						eventElem.style.top = `${top}rem`;
+						const height = (event.rel_end - event.rel_start) * scale;
+						eventElem.style.height = `${height}rem`;
+						eventElem.href = `https://programme.annecyfestival.com/en/event/${event.uuid}`;
+						eventElem.target = "_blank";
+						events.appendChild(eventElem);
+
+						const eventImg = document.createElement("img");
+						eventImg.src = event.banner;
+						eventImg.style.width = "100%";
+						eventElem.appendChild(eventImg);
+
+						const titleElem = document.createElement("div");
+						titleElem.innerText = event.title;
+						titleElem.className = "chonky";
+						eventElem.appendChild(titleElem);
+
+						const time = document.createElement("div");
+						time.innerText = event.fmt_duration;
+						eventElem.appendChild(time);
+
+						latestEnd = Math.max(latestEnd, event.rel_end);
+					});
+				});
+
+				events.style.height = `${scale*latestEnd}rem`;
+				events.style.width = `${modulo*Object.keys(data).length}rem`;
+				events.style.backgroundSize = `${modulo}rem ${scale*1800}rem`;
+
+				document.body.onscroll = (event) => {
+					const perc = document.body.scrollTop / document.body.scrollHeight;
+					
+					const date = new Date(2026, 5, 19);
+					const secs = perc * (latestEnd + 1300);
+					date.setSeconds(secs);
+					
+					const options = {
+						weekday: "long",
+						day: "numeric",
+						hour: "2-digit",
+						minute: "2-digit",
+					};
+					const dateStr = Intl.DateTimeFormat("en-GB", options).format(date);
+					const dateElem = document.getElementById("datetime");
+					dateElem.innerText = dateStr;
+				}
+			});
+
+		</script>
+	</body>
+</html>
