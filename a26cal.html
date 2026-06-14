@@ -9,17 +9,10 @@
 		</script>
 		<link rel="icon" href="favicon.ico" />
 		<style>
-			@font-face {
-				font-family: "Figtree";
-				src:
-					local("Figtree"),
-					url("./resources/Figtree-Regular.ttf")
-			}
-
 			body, html {
 				padding: 0px;
 				margin:  0px;
-				font-family: "Figtree", sans-serif;
+				font-family: sans-serif;
 				font-size: 12pt;
 
 				font-weight: lighter;
@@ -75,12 +68,29 @@
 			.chonky {
 				font-weight: bolder;
 			}
+
+			#footer {
+				position: fixed;
+				bottom: 2rem;
+				right: 2rem;
+
+				a {
+					img {
+						width: 7rem;
+					}
+				}
+			}
 		</style>
 	</head>
 	<body>
 		<div id="header"></div>
 		<div id="events"></div>
-		<div id="datetime">Friday, 20:00</div>
+		<div id="datetime">Friday 19, 00:00</div>
+		<div id="footer">
+			<a href="anike.studio" target="_blank">
+				<img src="./resources/logo.svg" />
+			</a>
+		</div>
 		<script>
 			const scale = 0.004;
 			const modulo = 13;
